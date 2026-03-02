@@ -14,4 +14,3 @@ if __name__ == "__main__":
                 print(f"Argument {nb}: {i}")
                 nb = nb + 1
     print(f"Total arguments: {arg}")
-
