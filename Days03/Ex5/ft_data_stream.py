@@ -1,20 +1,23 @@
 from typing import Generator
 
-def generator_for_players() -> Generator[str, None, None]:
+
+def generator_for_players() -> Generator[str, None, int]:
     event = 1
-    player = ["alice", "bob", "charlie", "pommeau_de_douche", "Hit", "Net", "Piegeamorues42"]
+    player = ["alice", "bob", "charlie", "pommeau_de_douche", "Hit",
+              "Net", "Piegeamorues42"]
     level = [5, 12, 8, 9, 55, 7, 8, 999]
     achivment = ['killed monster', 'found treasure', 'leveled up', 'noscope',
-                     'kill himself', 'take health', 'take potion of invisibility']
+                 'kill himself', 'take health', 'take potion of invisibility']
+    levl = 0
     tresure = 0
     for i in range(1000):
         if i == 0:
-            yield f"Event 1: Player {player[1]} (level {level[1]}) {achivment[1]}"
+            yield (f"Event 1: Player {player[1]} (level {level[1]}) {achivment[1]}")
         elif i == 1:
-            yield f"Event 2: Player {player[2]} (level {level[2]}) {achivment[2]}"
+            yield (f"Event 2: Player {player[2]} (level {level[2]}) {achivment[2]}")
             tresure += 1
         elif i == 2:
-            yield f"Event 3: Player {player[3]} (level {level[3]}) {achivment[3]} "
+            yield (f"Event 3: Player {player[3]} (level {level[3]}) {achivment[3]} ")
             level += 1
         else:
             z = 0
@@ -24,11 +27,14 @@ def generator_for_players() -> Generator[str, None, None]:
                 z += 1
             achivment_now = achivment[i % 7]
             if achivment_now == "level up":
-                level += 1
+                player[z] += 1
+                levl += 1
             elif achivment_now == "found treasure":
                 tresure += 1
             yield f"Event {event}: Player {player} (level {z}) {achivment_now}"
         event += 1
+    return (tresure, len(player), sum(level), levl)
+
 
 def fibonacci(max_n: int) -> Generator[int, None, None]:
     a = 0
@@ -53,43 +59,31 @@ def prime(max_n: int) -> Generator[int, None, None]:
         if is_prime:
             yield n
         n += 1
-    
-
-
-next(), iter(), range(), len(), print(), typing.Generator
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
 
     print("=== Game Data Stream Processor ===\n")
     print("Processing 1000 game events..\n")
+    generator = generator_for_players()
+    y = 0
+    for i in generator and y <= 1000:
+        if y < 3:
+            print(i)
+        y += 1
 
+    print("=== Stream Analytics ===")
+    tresure, player, level, level_up = next(i)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print(f"Total events processed: {y}")
+    print(f"High-level players ({player}): {level}")
+    print(f"Treasure events: {tresure}")
+    print(f"Level-up events: {level_up}\n")
+    print("Memory usage: Constant (streaming)")
 
     print("=== Generator Demonstration ===")
     lst = []
-    for nombre in fibonacci(10)
+    for nombre in fibonacci(10):
         lst += [nombre]
     print("Fibonacci sequence (first 10): ", end="")
     print(*lst, sep=", ")
