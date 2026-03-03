@@ -5,31 +5,36 @@ def generator_for_players() -> Generator[str, None, int]:
     event = 1
     player = ["alice", "bob", "charlie", "pommeau_de_douche", "Hit",
               "Net", "Piegeamorues42"]
-    level = [5, 12, 8, 9, 55, 7, 8, 999]
+    level = [5, 12, 8, 9, 55, 7, 999]
     achivment = ['killed monster', 'found treasure', 'leveled up', 'noscope',
                  'kill himself', 'take health', 'take potion of invisibility']
     levl = 0
     tresure = 0
     for i in range(1000):
         if i == 0:
-            yield (f"Event 1: Player {player[1]} (level {level[1]}) {achivment[1]}")
+            msg = (f"Event 1: Player {player[0]} "
+                   f"(level {level[0]}) {achivment[0]}")
+            yield msg
         elif i == 1:
-            yield (f"Event 2: Player {player[2]} (level {level[2]}) {achivment[2]}")
+            msg = (f"Event 2: Player {player[1]} "
+                   f"(level {level[1]}) {achivment[1]}")
+            yield msg
             tresure += 1
-        elif i == 2:
-            yield (f"Event 3: Player {player[3]} (level {level[3]}) {achivment[3]} ")
-            level += 1
+            msg = (f"Event 3: Player {player[2]} "
+                   f"(level {level[2]}) {achivment[2]}")
+            yield msg
+            levl += 1
         else:
             z = 0
-            players = player[i % 3]
+            players = player[i % len(player)]
 
             while players != player[z]:
                 z += 1
             achivment_now = achivment[i % 7]
-            if achivment_now == "level up":
-                player[z] += 1
+            if achivment_now == 'leveled up':
+                level[z] += 1
                 levl += 1
-            elif achivment_now == "found treasure":
+            elif achivment_now == 'found treasure':
                 tresure += 1
             yield f"Event {event}: Player {player} (level {z}) {achivment_now}"
         event += 1
@@ -67,16 +72,19 @@ if __name__ == "__main__":
     print("Processing 1000 game events..\n")
     generator = generator_for_players()
     y = 0
-    for i in generator and y <= 1000:
-        if y < 3:
-            print(i)
-        y += 1
-
-    print("=== Stream Analytics ===")
-    tresure, player, level, level_up = next(i)
-
+    try:
+        while y < 1000:
+            event = next(generator)
+            if y < 3:
+                print(event)
+            y += 1
+        while True:
+            next(generator)
+    except StopIteration as e:
+        tresure, player_count, level_sum, level_up = e.value
+    print("\n=== Stream Analytics ===")
     print(f"Total events processed: {y}")
-    print(f"High-level players ({player}): {level}")
+    print(f"High-level players ({player_count}): {level_sum}")
     print(f"Treasure events: {tresure}")
     print(f"Level-up events: {level_up}\n")
     print("Memory usage: Constant (streaming)")
