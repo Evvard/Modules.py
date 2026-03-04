@@ -53,21 +53,29 @@ if __name__ == "__main__":
         }
     print(f"Achievement counts: {achievement_counts}\n")
 
+    regions_data = [('alice', 'north'), ('bob', 'central'), ('charlie', 'north'), ('diana', 'east')]
+
+    active_regions = {region for name, region in regions_data}
     player = {x for x in achievement_counts}
     print("=== Set Comprehension Examples ===")
     print(f"Unique players: {player}")
 
-"""     unique_achivment = {
-    
-    
-    
-    
-    }
-    print(f"Unique achievements: {unique_achivment}")
- """
+    all_player_achievements = [Alice, Bob, Charlie, Diana]
+    unique_achievements = {achievement for player_set in all_player_achievements for achievement in player_set}
+    print(f"Unique achievements: {unique_achievements}")
+
+    regions_data = [('alice', 'north'), ('bob', 'central'), ('charlie', 'north'), ('diana', 'east')]
+    active_regions = {region for name, region in regions_data}
+    print(f"Active regions: {active_regions}")
+
     nb_player = len(achievement_counts)
-    print("=== Combined Analysis ===")
+    print("\n=== Combined Analysis ===")
     print(f"Total players: {nb_player}")
     print(f"Total unique achievements: {len(achivment_set)}")
-    print(f"Average score: {(x for y, x in data) / nb_player}")
-    print(f"Top performer: {}")
+    averge_score = (sum((x for y, x in data))) / nb_player
+    print(f"Average score: {averge_score}")
+    player = [x for y, x in data]
+    max_score = max(player)
+    player_max = {x for x, y in data if y == max_score}
+    len_of_achivment =  len({x for x, y in data if y == max_score}) - 1
+    print(f"Top performer: {player_max}, ({max_score}, {len_of_achivment})")
