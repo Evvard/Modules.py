@@ -88,7 +88,7 @@ if __name__ == "__main__":
     print(f"Treasure events: {tresure}")
     print(f"Level-up events: {level_up}\n")
     print("Memory usage: Constant (streaming)")
-
+	calculer le temps d'exécution d'un programme python
     print("=== Generator Demonstration ===")
     lst = []
     for nombre in fibonacci(10):
