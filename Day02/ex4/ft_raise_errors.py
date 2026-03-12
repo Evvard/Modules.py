@@ -1,4 +1,4 @@
-def check_plant_health(plant_name, water_level, sunlight_hours):
+def check_plant_health(plant_name, water_level, sunlight_hours) -> None:
     print("Testing good values...")
     for i in plant_name:
         try:
@@ -32,7 +32,7 @@ def check_plant_health(plant_name, water_level, sunlight_hours):
     print("\nAll error raising tests completed!")
 
 
-def test_plant_checks():
+def test_plant_checks() -> None:
     print("=== Garden Plant Health Checker ===")
     plant_name = ["tomato", "salad", "", "rest"]
     check_plant_health(plant_name, 15, 0)

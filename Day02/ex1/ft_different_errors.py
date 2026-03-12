@@ -34,7 +34,7 @@ def garden_operations(object: str, division: str, files: str,
         return
 
 
-def test_error_types():
+def test_error_types() -> None:
 
     dico = {'nom': 'Alice', 'age': 30}
 

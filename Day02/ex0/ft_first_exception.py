@@ -14,7 +14,7 @@ def check_temperature(temp_str: str) -> str:
     return f"Error: '{temp_str}' is not a valid number"
 
 
-def test_temperature_input():
+def test_temperature_input() -> None:
     print("=== Garden Temperature Checker ===", "\n")
     print("Testing temperature: ")
     print(check_temperature("25"), "\n")

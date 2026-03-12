@@ -1,4 +1,4 @@
-def water_plants(plant_list):
+def water_plants(plant_list) -> None:
     print("Testing normal watering...")
     print("Opening watering system")
     i = 0
@@ -8,7 +8,7 @@ def water_plants(plant_list):
     print("Watering completed successfully!\n")
 
 
-def test_watering_system(plant_list):
+def test_watering_system(plant_list) -> None:
     print("Testing with error...")
     print("Opening watering system")
     try:

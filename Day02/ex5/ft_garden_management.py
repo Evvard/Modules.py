@@ -64,7 +64,7 @@ class GardenManager:
             print(f"{self.sun[i]}, is too low (min 2)")
 
 
-def test_garden_management():
+def test_garden_management() -> None:
     print("=== Garden Management System ===\n")
     plants_atribuates = ["tomato", "5", "8",
                          "letuce", "15", "9",
