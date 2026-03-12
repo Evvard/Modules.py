@@ -1,3 +1,8 @@
+class InvalidPlant(Exception):
+    def __init__(self) -> None:
+        super().__init__("Error: Cannot water")
+
+
 def water_plants(plant_list) -> None:
     print("Testing normal watering...")
     print("Opening watering system")
@@ -14,10 +19,10 @@ def test_watering_system(plant_list) -> None:
     try:
         for i in plant_list:
             if not i.isalpha():
-                raise ValueError
+                raise InvalidPlant()
             print("Watering", i)
-    except ValueError:
-        print(f"Error: Cannot water {i} - invalid plant!")
+    except InvalidPlant as e:
+        print(e, f"{i} - invalid plant!")
     finally:
         print("Closing watering system (cleanup)\n")
         print("Cleanup always happens, even with errors!")

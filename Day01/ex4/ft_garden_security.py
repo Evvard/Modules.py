@@ -15,8 +15,7 @@ class Plantes_Security:
         if new_height < 0:
             print("Invalid operation attempted: age ", end="")
             print(f"{new_height} height [REJECTED]")
-            print("Security: Negative age rejected")
-            print()
+            print("Security: Negative age rejected\n")
         else:
             self._height = new_height
             print(f"Height updated: {self._height} days [OK]")
@@ -25,12 +24,10 @@ class Plantes_Security:
         if new_age < 0:
             print("Invalid operation attempted: age", end="")
             print(f" {new_age} days [REJECTED]")
-            print("Security: Negative age rejected")
-            print()
+            print("Security: Negative age rejected\n")
         else:
             self._age = new_age
-            print(f"Age updated: {self._age} days [OK]")
-            print()
+            print(f"Age updated: {self._age} days [OK]\n")
 
     age = property(get_age, set_age)
     height = property(get_height, set_height)

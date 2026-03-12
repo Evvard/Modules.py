@@ -1,3 +1,39 @@
+class GardenError(Exception):
+    pass
+
+
+class EmptyPlant(GardenError):
+    def __init__(self) -> None:
+        super().__init__("Error adding plant: Plant name cannot be empty")
+
+
+class InvalidPlant(GardenError):
+    def __init__(self) -> None:
+        message = ("Error adding plant: Plant name cannot be")
+        super().__init__(message, "other thing than a letter!")
+
+
+class NoNumerciValue(GardenError):
+    def __init__(self) -> None:
+        super().__init__("water level and sunlight hours need to be numeric")
+
+
+class WaterError(GardenError):
+    def __init__(self, water: int) -> None:
+        if water > 10:
+            super().__init__(f"Water level {water} is too high (max 10)")
+        else:
+            super().__init__(f"Water level {water} is too low (min 1)")
+
+
+class SunError(GardenError):
+    def __init__(self, sun: int) -> None:
+        if sun > 12:
+            super().__init__(f"Sun level {sun} is too high (max 12)")
+        else:
+            super().__init__(f"Sun level {sun} is too low (min 2)")
+
+
 class GardenManager:
     def __init__(self) -> None:
         self.plants = []
@@ -8,76 +44,76 @@ class GardenManager:
         print("Adding plants to garden...")
         try:
             for i in range(0, len(plants), 3):
-                if not (i[0] and i[1] and i[2]):
-                    raise ValueError
-                elif not i[0].isapha():
-                    raise Exception
-                elif not (i[1] and i[2]).isdigit():
-                    raise EOFError
+                if not (plants[i] and plants[i + 1] and plants[i + 2]):
+                    raise EmptyPlant()
+                elif not plants[i].isalpha():
+                    raise InvalidPlant()
+                elif not (plants[i + 1].isdigit() and plants[i + 2].isdigit()):
+                    raise NoNumerciValue
                 else:
-                    print(f"Added {i[0]} successfully")
-                    self.plants += i[0]
-                    self.water += int(i[1])
-                    self.sun += int(i[2])
-        except ValueError:
-            print("Error adding plant: Plant name cannot be empty!")
-        except Exception:
-            print("Error adding plant: Plant name cannot be", end="")
-            print("other thing than a letter!")
-        except EOFError:
-            print("water level and sunlight hours need to be numeric")
+                    print(f"Added {plants[i]} successfully")
+                    self.plants += [plants[i]]
+                    self.water += [int(plants[i + 1])]
+                    self.sun += [int(plants[i + 2])]
+        except EmptyPlant as e:
+            print(e)
+        except InvalidPlant as e:
+            print(e)
+        except NoNumerciValue as e:
+            print(e)
 
-    def water_a_plant(self):
+    def water_a_plant(self) -> None:
         print("\nWatering plants...\nOpening watering system")
-        for i in len(self.add_plant):
-            print(f"Watering {i} - success")
-            self.water[i] += 1
-        print("Closing watering system (cleanup)")
+        try:
+            for i in range(len(self.plants)):
+                if not self.plants:
+                    raise GardenError("No plants to water!")
+                print(f"Watering {self.water[i]} - success")
+                self.water[i] += 1
+        except Exception as e:
+            print(f"Watering system encountered an error: {e}")
+        finally:
+            print("Closing watering system (cleanup)\n")
 
-    def plant_health(self):
+    def plant_health(self) -> None:
         print("Checking plant health...")
 
-        try:
-            for i in len(self.plants):
-                if self.water > 10:
-                    raise ZeroDivisionError
-                elif self.water < 1:
-                    raise EOFError
-                elif self.sun > 12:
-                    raise ValueError
-                elif self.sun < 2:
-                    raise KeyError
+        for i in range(len(self.plants)):
+            try:
+                if self.water[i] > 10 or self.water[i] < 1:
+                    raise WaterError(self.water[i])
+                elif self.sun[i] > 12 or self.sun[i] < 2:
+                    raise SunError({self.sun[i]})
                 else:
                     print(f"{self.plants[i]}: healthy (water: ", end="")
                     print(f"{self.water[i]}, sun: {self.sun[i]})")
-        except ZeroDivisionError:
-            print(f"Error checking {self.plants[i]}: Water level", end=" ")
-            print(f"{self.water[i]}, is too high (max 10)")
-        except EOFError:
-            print(f"Error checking {self.plants[i]}: Water level", end=" ")
-            print(f"{self.water[i]}, is too low (min 1)")
-        except ValueError:
-            print(f"Error checking {self.plants[i]}: Sun level", end=" ")
-            print(f"{self.sun[i]}, is too high (max 12)")
-        except KeyError:
-            print(f"Error checking {self.plants[i]}: Sun level", end=" ")
-            print(f"{self.sun[i]}, is too low (min 2)")
+            except WaterError as e:
+                print(f"Error checking {self.plants[i]}:", e)
+                print()
+            except SunError as e:
+                print(f"Error checking {self.plants[i]}", e)
+                print()
 
 
 def test_garden_management() -> None:
     print("=== Garden Management System ===\n")
     plants_atribuates = ["tomato", "5", "8",
                          "letuce", "15", "9",
-                         "", "88", "test_erreur"]
-    GardenManager.add_plant(plants_atribuates)
-    GardenManager.water_a_plant()
-    GardenManager.plant_health()
+                         "", "0", "test_erreur"]
+    garden = GardenManager()
+    garden.add_plant(plants_atribuates)
+    garden.water_a_plant()
+    garden.plant_health()
     print("Testing error recovery...")
-
-
-
-
-
+    try:
+        if int(plants_atribuates[7]) < 1:
+            raise GardenError()
+    except ValueError:
+        print("The value is not int value bro")
+    except GardenError:
+        print("Caught GardenError: Not enough water in tank")
+    finally:
+        print("System recovered and continuing...\n")
     print("Garden management system test complete!")
 
 

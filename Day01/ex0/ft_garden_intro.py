@@ -1,14 +1,13 @@
-def function_0() -> None:
+def ft_garden_intro() -> None:
     nom = "Rose"
     taille = 25
     age = 30
     print("=== Welcome to My Garden ===")
     print("Plant:", nom)
     print("Height:", taille, "cm")
-    print("Age:", age, "days")
-    print()
+    print("Age:", age, "days\n")
     print("=== End of Program ===")
 
 
 if __name__ == "__main__":
-    function_0()
+    ft_garden_intro()
