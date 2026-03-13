@@ -95,7 +95,6 @@ if __name__ == "__main__":
         lst += [nombre]
     print("Fibonacci sequence (first 10): ", end="")
     print(*lst, sep=", ")
-    print("Fibonacci sequence (first 10):")
 
     lst = []
     for nombre in prime(11):

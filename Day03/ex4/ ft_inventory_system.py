@@ -21,9 +21,9 @@ if __name__ == "__main__":
         total_items += total_item
     unique_items = len(inventory.keys())
     print(f"Total items in inventory: {total_items}")
-    print(f"Unique item types: {unique_items}\n")
+    print(f"Unique item types: {unique_items}")
     if total_items:
-        print("=== Current Inventory ===")
+        print("\n=== Current Inventory ===")
         copy_inventory = inventory.copy()
         while copy_inventory:
             for i in copy_inventory.items():
