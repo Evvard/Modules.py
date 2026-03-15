@@ -24,9 +24,10 @@ class NumericProcessor(DataProcessor):
 
     def validate(self, data: Any) -> bool:
         try:
-            for i in data:
-                int(i)
-            return True
+            if data:
+                for i in data:
+                    int(i)
+                return True
         except TypeError:
             return False
 
@@ -48,8 +49,9 @@ class TextProcessor(DataProcessor):
 
     def validate(self, data: Any) -> bool:
         try:
-            str(data)
-            return True
+            if data:
+                str(data)
+                return True
         except TypeError:
             return False
 
@@ -68,11 +70,12 @@ class LogProcessor(DataProcessor):
 
     def validate(self, data: Any) -> bool:
         try:
-            if not isinstance(data, str) or ":" not in data:
-                return False
-            valid_levels = ["ERROR", "INFO", "CORRECT", "DEBUG"]
-            prefix = data.split(":", 1)[0]
-            return prefix in valid_levels
+            if data:
+                if not isinstance(data, str) or ":" not in data:
+                    return False
+                valid_levels = ["ERROR", "INFO", "CORRECT", "DEBUG"]
+                prefix = data.split(":", 1)[0]
+                return prefix in valid_levels
         except TypeError or ValueError:
             return False
 
