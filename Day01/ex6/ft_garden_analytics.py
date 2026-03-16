@@ -38,18 +38,18 @@ class PrizeFlower(FloweringPlant):
 
 class GardenManager:
 
-    nombre_of_user = 0
+    number_of_user = 0
 
     def __init__(self, username: str) -> None:
         self.user_name = username
         self.plants = []
-        GardenManager.nombre_of_user += 1
+        GardenManager.number_of_user += 1
 
     def add_plant(self, plant: Plant) -> None:
         self.plants.append(plant)
 
     def create_garden_network(cls):
-        return cls.nombre_of_user
+        return cls.number_of_user
     create_garden_network = classmethod(create_garden_network)
 
     class GardenStats:
