@@ -48,28 +48,27 @@ class GardenManager:
     def add_plant(self, plant: Plant) -> None:
         self.plants.append(plant)
 
-    @classmethod
     def create_garden_network(cls):
         return cls.nombre_of_user
+    create_garden_network = classmethod(create_garden_network)
 
     class GardenStats:
 
-        @staticmethod
         def validate_height(size: int) -> bool:
             if size > 0:
                 return True
             else:
                 return False
+        validate_height = staticmethod(validate_height)
 
-        @staticmethod
         def summarize_plants(plants: list) -> str:
             count = len(plants)
             total_growth = 0
             for p in plants:
                 total_growth += p.size
             return f"Plants added: {count}, Total growth: {total_growth}cm"
+        summarize_plants = staticmethod(summarize_plants)
 
-        @staticmethod
         def count_types(plants: list) -> str:
             normal = 0
             flowering = 0
@@ -81,8 +80,9 @@ class GardenManager:
                     flowering += 1
                 elif isinstance(p, Plant):
                     normal += 1
-            return (f"Plant types: {normal} regular, {flowering}"
+            return (f"Plant types: {normal} regular, {flowering} "
                     f"flowering, {prize} prize flowers")
+        count_types = staticmethod(count_types)
 
 
 if __name__ == "__main__":

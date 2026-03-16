@@ -26,7 +26,7 @@ if __name__ == "__main__":
     y = 0
     i = len(params)
     while y < i:
-        Plant = Plantes(params[y], params[y + 1], params[y + 2])
-        Plant.printclass()
+        plant = Plantes(params[y], params[y + 1], params[y + 2])
+        plant.printclass()
         y += 3
-    Plantes.return_plant_max()
+    total = Plantes.return_plant_max()

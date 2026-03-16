@@ -1,8 +1,8 @@
 class Plantes_Security:
 
     def __init__(self, name: str, height: int, age: int) -> None:
-        self.height = height
-        self.age = age
+        self._height = height
+        self._age = age
         self.name = name
 
     def get_height(self) -> int:
@@ -40,6 +40,6 @@ if __name__ == "__main__":
     print("=== Garden Security System ===")
     plant = "Rose"
     print(f"Plant created: {plant}")
-    Plant1 = Plantes_Security(plant, 25, 30)
-    Plant1.age = -5
-    print(f"Current plant: {Plant1}")
+    plant1 = Plantes_Security(plant, 25, 30)
+    plant1.age = -5
+    print(f"Current plant: {plant1}")

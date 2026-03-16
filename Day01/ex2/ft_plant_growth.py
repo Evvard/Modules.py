@@ -8,9 +8,9 @@ class Plant:
     def function_class(self) -> None:
         print(f"{self.name}: {self.age}cm, {self.days} days old")
 
-    def grow_print(self) -> None:
+    def grow_print(self, nb_day: int) -> None:
         print(f"{self.name}: {self.age + self.grow}cm", end="")
-        print(f" {self.days + 6} days old")
+        print(f" {self.days + nb_day} days old")
 
 
 if __name__ == "__main__":
@@ -18,9 +18,9 @@ if __name__ == "__main__":
     print("=== Day 1 ===")
     plant1 = Plant("Rose", 25, 30, growing)
     plant1.function_class()
-    print("=== Day 7 ===")
-    plant2 = Plant("Rose", 25, 30, growing)
-    plant2.grow_print()
+    nb_day = growing
+    print(f"=== Day {nb_day} ===")
+    plant1.grow_print(nb_day)
     if growing >= 0:
         print(f"Growth this week: +{growing}cm")
     else:
