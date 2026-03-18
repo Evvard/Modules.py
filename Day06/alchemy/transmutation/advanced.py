@@ -3,8 +3,8 @@ from ..potions import healing_potion
 
 
 def philosophers_stone() -> str:
-    message = f"Philosopher’s stone created using [{lead_to_gold}]"
-    return f"{message} and [{healing_potion}]"
+    message = f"Philosopher’s stone created using {lead_to_gold()}"
+    return f"{message} and {healing_potion()}"
 
 
 def elixir_of_life() -> str:
