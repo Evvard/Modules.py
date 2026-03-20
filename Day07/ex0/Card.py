@@ -2,8 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class Card(ABC):
-
-    def __init__(self, name: str = "", cost: int = "",
+    def __init__(self, name: str = "", cost: int = None,
                  rarity: str = "") -> None:
         self.name = name
         self.cost = cost
@@ -15,9 +14,12 @@ class Card(ABC):
 
     def get_card_info(self) -> dict:
         tipe = 'human'
-        if 'dragon' in self.name:
+        if 'Dragon' in self.name:
             tipe = 'Creature'
-        {'name': self.name, 'cost': self.cost, 'rarity': self.rarity, 'type': tipe, 'attack': self.}
+        dict = {'name': self.name, 'cost': self.cost}
+        dict.update({'rarity': self.rarity})
+        dict.update({'type': tipe})
+        return dict
 
     def is_playable(self, available_mana: int) -> bool:
         if available_mana <= 3:
