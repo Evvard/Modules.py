@@ -25,9 +25,7 @@ def main() -> None:
     playable = fire_dragon.is_playable(mana)
     print(f"Playable: {playable}")
     if playable:
-        game_state = {'mana_used': cost,
-                      'effect': 'Creature summoned to battlefield'}
-        play = fire_dragon.play(game_state)
+        play = fire_dragon.play()
         print(f"Play result: {play}")
 
         print("\nFire Dragon attacks Goblin Warrior:")

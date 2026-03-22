@@ -4,19 +4,24 @@ from .Card import Card
 class CreatureCard(Card):
 
     def __init__(self, name: str, cost: int,
-                 rarity: str, attack: int, health: int) -> None:
-        self.attack = attack
+                 rarity: str, attack_damage: int, health: int) -> None:
+        self.attack_damage = attack_damage
         self.health = health
         super().__init__(name, cost, rarity)
 
-    def play(self, game_state: dict) -> dict:
+    def play(self, game_state: dict = '') -> dict:
         dict = {'card_played': self.name}
-        dict.update(game_state)
+        if game_state != '':
+            dict.update(game_state)
+        else:
+            other_choice = {'mana used': self.cost,
+                            'effect': 'Creature summoned to battlefield'}
+            dict.update(other_choice)
         return dict
 
     def get_card_info(self) -> dict:
         data = super().get_card_info()
-        dict = {'attack': self.attack, 'health': self.health}
+        dict = {'attack': self.attack_damage, 'health': self.health}
         data.update(dict)
         return data
 

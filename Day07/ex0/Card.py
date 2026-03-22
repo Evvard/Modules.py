@@ -12,7 +12,7 @@ class Rarity(Enum):
 
 class Card(ABC):
     def __init__(self, name: str = "", cost: int = None,
-                 rarity: str = "") -> None:
+                 rarity: str = "Common") -> None:
         self.name = name
         if cost < 0:
             print("---Negative value are not accept---")
