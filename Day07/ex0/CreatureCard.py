@@ -4,7 +4,8 @@ from .Card import Card
 class CreatureCard(Card):
 
     def __init__(self, name: str, cost: int,
-                 rarity: str, attack_damage: int, health: int) -> None:
+                 rarity: str = 'commun', attack_damage: int = 9,
+                 health: int = 10) -> None:
         self.attack_damage = attack_damage
         self.health = health
         super().__init__(name, cost, rarity)

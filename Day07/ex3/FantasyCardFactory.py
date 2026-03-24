@@ -1,5 +1,5 @@
 from ex3.CardFactory import CardFactory
-from ex0.Card import Card
+from ex0.CreatureCard import CreatureCard, Card
 from ex1.main import SpellCard, ArtifactCard
 import random
 
@@ -9,33 +9,33 @@ class FantasyCardFactory(CardFactory):
     def create_creature(self, name_or_power: str | int | None = None) -> Card:
         if not name_or_power:
             nombre = random.randint(2, 4)
-            return Card('goblin', nombre)
+            return CreatureCard('goblin', nombre)
         try:
             name_or_power = int(name_or_power)
             if name_or_power <= 0:
                 print("No negative Value, rebalancing of value")
                 name_or_power = 2
             if name_or_power <= 4:
-                return Card("goblin", name_or_power)
+                return CreatureCard("goblin", name_or_power)
             if name_or_power > 4:
-                return Card('dragon', name_or_power, 'Legendary')
+                return CreatureCard('dragon', name_or_power, 'Legendary')
         except ValueError or TypeError:
             pass
         try:
             str(name_or_power)
             if "dragon" in name_or_power.lower():
                 nombre = random.randint(5, 8)
-                return Card(name_or_power, nombre, "Legendary")
+                return CreatureCard(name_or_power, nombre, "Legendary")
             elif "goblin" in name_or_power.lower():
                 nombre = random.randint(2, 4)
-                return Card(name_or_power, nombre)
+                return CreatureCard(name_or_power, nombre)
             else:
                 print("Wrong \'Name\' for Card, Game change to Goblin")
                 nombre = random.randint(2, 4)
-                return Card('name_or_power', nombre)
+                return CreatureCard('name_or_power', nombre)
         except ValueError or TypeError:
             nombre = random.randint(2, 4)
-            return Card('goblin', nombre)
+            return CreatureCard('goblin', nombre)
 
     def create_spell(self, name_or_power: str | int | None = None) -> Card:
         spell = {'fire': 10, 'freeze': 5, "lightning": 3}

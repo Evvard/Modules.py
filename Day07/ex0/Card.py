@@ -14,11 +14,13 @@ class Card(ABC):
     def __init__(self, name: str = "", cost: int = None,
                  rarity: str = "Common") -> None:
         self.name = name
-        if cost < 0:
-            print("---Negative value are not accept---")
-            cost = -cost
-        else:
-            self.cost = cost
+        if cost is None or cost < 0:
+            if cost is not None:
+                print("---Negative value are not accept---")
+                cost = -cost
+            else:
+                cost = 0
+        self.cost = cost
         valid_rarities = [r.value for r in Rarity]
         if rarity in valid_rarities:
             self.rarity = rarity
