@@ -19,14 +19,12 @@ class Card(ABC):
                 print("---Negative value are not accept---")
                 cost = -cost
             else:
-                cost = 0
+                cost = 1
         self.cost = cost
         valid_rarities = [r.value for r in Rarity]
-        if rarity in valid_rarities:
+        if rarity.capitalize() in valid_rarities:
             self.rarity = rarity
         else:
-            message = "Game atribate you common rarity"
-            print(f"The rarity value is not correctly define, {message}")
             self.rarity = "common"
 
     @abstractmethod

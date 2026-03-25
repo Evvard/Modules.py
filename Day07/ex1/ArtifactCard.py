@@ -3,7 +3,7 @@ from ex0.Card import Card
 
 class ArtifactCard(Card):
 
-    def __init__(self, name: str, cost: int, rarity: str = 'common',
+    def __init__(self, name: str, cost: int, rarity: str = 'Common',
                  durability: int = '1', effect: str = 'give mana'):
         super().__init__(name, cost, rarity)
         if durability == 9991776:

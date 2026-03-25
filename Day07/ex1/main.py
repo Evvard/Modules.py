@@ -6,12 +6,15 @@ from ex1.Deck import Deck
 
 def main() -> None:
     print("\n=== DataDeck Deck Builder ===\n")
-
-    effect = 'Deal 3 damage to target'
-    lightning_bolt = SpellCard("Lightning Bolt", 4.5, "Legendary", effect)
-    mana_crystal = ArtifactCard('Mana Crystal', 5, "Mythic", 9991776,
-                                "+1 mana per turn")
-    fire_dragon = CreatureCard('Fire Dragon', 5, "Common", 0, 4)
+    try:
+        effect = 'Deal 3 damage to target'
+        lightning_bolt = SpellCard("Lightning Bolt", 4.5, "Legendary", effect)
+        mana_crystal = ArtifactCard('Mana Crystal', 5, "Mythic", 9991776,
+                                    "+1 mana per turn")
+        fire_dragon = CreatureCard('Fire Dragon', 5, "Common", 0, 4)
+    except TypeError:
+        print("The value in the input are not correct, please verify types.")
+        return
 
     deck = Deck()
     deck.add_card(lightning_bolt)
@@ -22,7 +25,7 @@ def main() -> None:
     stat = deck.get_deck_stats()
     print("Building deck with different card types...")
     print(stat)
-    print("\nDrawing and playing cards:")
+    print("\nDrawing and playing cards:\n")
     card = deck.draw_card()
     print(card.play(), '\n', sep='')
     card = deck.draw_card()

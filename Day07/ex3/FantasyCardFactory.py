@@ -35,7 +35,7 @@ class FantasyCardFactory(CardFactory):
                 return CreatureCard('name_or_power', nombre)
         except ValueError or TypeError:
             nombre = random.randint(2, 4)
-            return CreatureCard('goblin', nombre)
+            return CreatureCard('goblin', nombre, '')
 
     def create_spell(self, name_or_power: str | int | None = None) -> Card:
         spell = {'fire': 10, 'freeze': 5, "lightning": 3}
