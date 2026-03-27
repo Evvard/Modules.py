@@ -1,0 +1,19 @@
+[project]
+name = "loading"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "eolivier", email = "eolivier@student.42nice.fr"}
+]
+requires-python = ">=3.10,<3.11"
+
+dependencies = [
+    "numpy==1.24.4",
+    "pandas==1.5.3",
+    "requests==2.31.0",
+    "matplotlib==3.7.1"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

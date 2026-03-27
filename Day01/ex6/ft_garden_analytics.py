@@ -48,7 +48,7 @@ class GardenManager:
     def add_plant(self, plant: Plant) -> None:
         self.plants.append(plant)
 
-    def create_garden_network(cls):
+    def create_garden_network(cls) -> Plant:
         return cls.number_of_user
     create_garden_network = classmethod(create_garden_network)
 
