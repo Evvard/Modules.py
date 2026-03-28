@@ -12,18 +12,18 @@ def main() -> None:
     mode = os.getenv("MATRIX_MODE", "None")
     data = os.getenv("DATABASE_URL", "None")
     api = os.getenv("API_KEY", "None")
-    if not api:
-        pass
+    if api != "None":
+        api = "Authenticated"
     log_level = os.getenv("LOG_LEVEL", "None")
     zion = os.getenv("ZION_ENDPOINT", "None")
     print("\nORACLE STATUS: Reading the Matrix...\n")
     print("Configuration loaded:")
     print(f"Mode: {mode}")
     print(f"Database: {data}")
-    print("API Access : Authenticated")
+    print(f"API Access : {api}")
     print(f"Log Level: {log_level}")
     print(f"Zion Network: {zion}")
-    
+
     print("\nEnvironment security check:")
     print("[OK] No hardcoded secrets detected")
     if os.path.exists(".env"):
