@@ -9,26 +9,13 @@ def main() -> None:
         print("Missing 'dotenv' retry")
         sys.exit(1)
     load_dotenv()
-    mode = os.getenv("MATRIX_MODE")
-    if not mode:
-        print("missing data for \"MATRIX_MODE\"")
-        return
-    data = os.getenv("DATABASE_URL")
-    if not data:
-        print("missing data for \"DATABASE_URL\"")
-        return
-    api = os.getenv("API_KEY")
+    mode = os.getenv("MATRIX_MODE", "None")
+    data = os.getenv("DATABASE_URL", "None")
+    api = os.getenv("API_KEY", "None")
     if not api:
-        print("missing data for \"API_KEY\"")
-        return
-    log_level = os.getenv("LOG_LEVEL")
-    if not log_level:
-        print("missing data for \"LOG_LEVEL\"")
-        return
-    zion = os.getenv("ZION_ENDPOINT")
-    if not zion:
-        print("missing data for \"ZION_ENDPOINT\"")
-        return
+        pass
+    log_level = os.getenv("LOG_LEVEL", "None")
+    zion = os.getenv("ZION_ENDPOINT", "None")
     print("\nORACLE STATUS: Reading the Matrix...\n")
     print("Configuration loaded:")
     print(f"Mode: {mode}")
