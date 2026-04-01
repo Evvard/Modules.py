@@ -58,9 +58,10 @@ class SpaceMission(BaseModel):
             if long_mission:
                 if member.years_experience >= 5:
                     experienced_count += 1
-        if experienced_count * 2 < total:
-            raise ValueError("For long mission, need a lot of xp")
-        if capitain == 0 or commander == 0:
+        if long_mission:
+            if experienced_count * 2 < total:
+                raise ValueError("For long mission, need a lot of xp")
+        if capitain == 0 and commander == 0:
             raise ValueError("Must have at least one Commander or Captain")
         return self
 
@@ -68,7 +69,79 @@ class SpaceMission(BaseModel):
 if __name__ == "__main__":
     print("Space Mission Crew Validation")
     print("=========================================")
-    print("Valid mission created:")
-    
+    try:
+        sarah = CrewMember(
+                          member_id="M2024_MARS",
+                          name="Sarah Connor",
+                          rank=Rank.commander,
+                          age=32,
+                          specialization="Mission Command",
+                          years_experience=15,
+                          is_active=True
+                          )
+        john = CrewMember(
+                         member_id="M2024_MARS",
+                         name="John Smith",
+                         rank=Rank.lieutenant,
+                         age=32,
+                         specialization="Navigation",
+                         years_experience=15,
+                         is_active=True
+                         )
+        alice = CrewMember(
+                           member_id="M2024_MARS",
+                           name="John Smith",
+                           rank=Rank.officer,
+                           age=32,
+                           specialization="Navigation",
+                           years_experience=15,
+                           is_active=True
+                           )
+        bob = CrewMember(
+                        member_id="M2024_MARS",
+                        name="Alice Johnson",
+                        rank=Rank.officer,
+                        age=32,
+                        specialization="Engineering",
+                        years_experience=15,
+                        is_active=True
+                        )
+        list_of_passenger = [sarah, john, alice]
 
+        mission = SpaceMission(
+                              mission_id="M2024_MARS",
+                              mission_name="Mars Colony Establishment",
+                              destination="Mars",
+                              launch_date=datetime.now(),
+                              duration_days=900,
+                              crew=list_of_passenger,
+                              budget_millions=2500.0
+                              )
 
+        print("Valid mission created:")
+        print(f"Mission: {mission.mission_name}")
+        print(f"ID: {mission.mission_id}")
+        print(f"Destination: {mission.destination}")
+        print(f"Duration: {mission.duration_days} days")
+        print(f"Budget: ${mission.budget_millions}M")
+        print(f"Crew size: {len(mission.crew)}")
+        print("Crew members:")
+        for member in mission.crew:
+            mb = member.specialization
+            print(f"- {member.name} ({member.rank.value}) - {mb}")
+
+        print("\n=========================================")
+
+        mission_2 = SpaceMission(
+                              mission_id="M2024_MARCLOR",
+                              mission_name="Marclor Colony Establishment",
+                              destination="South Park",
+                              launch_date=datetime.now(),
+                              duration_days=900,
+                              crew=[bob],
+                              budget_millions=2500.0
+                              )
+    except ValidationError as e:
+        print("Expected validation error:")
+        for error in e.errors():
+            print(error['msg'])
