@@ -54,8 +54,7 @@ def main() -> None:
     except ValidationError as e:
         print("Expected validation error:")
         for error in e.errors():
-            if 'crew_size' in error['loc']:
-                print(error['msg'])
+            print(error['msg'])
 
 
 if __name__ == "__main__":
