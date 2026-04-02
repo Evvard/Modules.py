@@ -13,9 +13,15 @@ def spell_transformer(spells: List[str]) -> List[str]:
     return map(lambda nv: f"*{nv}*", spells)
 
 
-
 def mage_stats(mages: list[dict]) -> dict:
+    mx = max(mages, key=lambda x: x["power"])
+    mi = min(mages, key=lambda x: x["power"])
+    avg = round(sum(mage["power"] for mage in mages) / len(mages))
 
+    return {"max_power": mx["power"],
+            "min_power": mi["power"],
+            "avg_power": avg
+            }
 
 
 def main() -> None:
@@ -30,10 +36,8 @@ def main() -> None:
     spell = ["Fire", "Ice", "92i"]
     print()
     print(list(spell_transformer(spell)))
-
-
-
-
+    print()
+    print("Resultat de mage_stats:", mage_stats(dictionnary))
 
 
 if __name__ == "__main__":
