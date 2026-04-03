@@ -35,7 +35,7 @@ def main() -> None:
 
     spell = ["Fire", "Ice", "92i"]
     print()
-    print(list(spell_transformer(spell)))
+    print("Resultat de spell_tranformer :", list(spell_transformer(spell)))
     print()
     print("Resultat de mage_stats:", mage_stats(dictionnary))
 
