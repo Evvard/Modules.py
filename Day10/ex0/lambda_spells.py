@@ -6,11 +6,11 @@ def artifact_sorter(artifacts: List[dict]) -> List[dict]:
 
 
 def power_filter(mages: List[dict], min_power: int) -> List[dict]:
-    return filter(lambda item: item['power'] >= min_power, mages)
+    return list(filter(lambda item: item['power'] >= min_power, mages))
 
 
 def spell_transformer(spells: List[str]) -> List[str]:
-    return map(lambda nv: f"*{nv}*", spells)
+    return list(map(lambda nv: f"*{nv}*", spells))
 
 
 def mage_stats(mages: list[dict]) -> dict:
@@ -31,11 +31,11 @@ def main() -> None:
     print()
     print("Resultat de arrtifact_sorter :", artifact_sorter(dictionnary))
     print()
-    print("resultat de power_filter :", list(power_filter(dictionnary, 2)))
+    print("resultat de power_filter :", power_filter(dictionnary, 2))
 
     spell = ["Fire", "Ice", "92i"]
     print()
-    print("Resultat de spell_tranformer :", list(spell_transformer(spell)))
+    print("Resultat de spell_tranformer :", spell_transformer(spell))
     print()
     print("Resultat de mage_stats:", mage_stats(dictionnary))
 
