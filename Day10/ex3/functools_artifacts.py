@@ -17,8 +17,7 @@ def spell_reducer(spells: list[int], operation: str) -> int:
         else:
             resultat = functools.reduce(lambda x, y: min(x, y), spells)
         return resultat
-    else:
-        return ValueError("Wrong operation name")
+    return 0
 
 
 def base_enchant(power: int, element: str, target: str) -> str:
@@ -26,11 +25,11 @@ def base_enchant(power: int, element: str, target: str) -> str:
 
 
 def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
-    enchent = {
+    enchent: dict[str, Callable[..., Any]] = {
         "fart": functools.partial(base_enchantment, power=50, element="fart"),
         "air": functools.partial(base_enchantment, power=50, element="air"),
         "fire": functools.partial(base_enchantment, power=50, element="fire")
-              }
+    }
     return enchent
 
 
